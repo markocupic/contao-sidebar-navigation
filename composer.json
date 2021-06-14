@@ -3,9 +3,11 @@
     "description": "Sidebar navigation for Contao CMS",
     "keywords": [
         "contao",
-        "bundle",
-        "tag 3",
-        "tag 4"
+        "sidebar",
+        "navigation",
+        "dropdown",
+        "slidedown",
+        "jQuery"
     ],
     "type": "contao-bundle",
     "license": "GPL-3.0-or-later",
@@ -48,5 +50,5 @@
     },
     "extra": {
         "contao-manager-plugin": "Markocupic\\ContaoSidebarNavigation\\ContaoManager\\Plugin"
-    },
+    }
 }
