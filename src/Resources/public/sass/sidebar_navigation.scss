@@ -1,0 +1,182 @@
+/**
+ * Contao Sidebar Navigation
+ */
+
+// Variables
+$level-1-offset: 42px;
+$level-2-offset: 50px;
+$level-3-offset: 58px;
+$level-4-offset: 66px;
+
+.sidebar-navigation {
+  padding: 15px 0;
+  margin: 40px 0 0 0;
+  text-align: left;
+
+  * {
+    text-decoration: none;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    > a,
+    > strong {
+      /** **/
+    }
+
+    > strong.active {
+      /** **/
+    }
+
+    &:hover {
+      > a, > strong {
+        /** **/
+      }
+    }
+  }
+
+  // Hide Submenus
+  ul.level_1 {
+    display: block;
+    ul {
+      display: none;
+    }
+  }
+
+  // Borders
+  ul.level_1 {
+    > li {
+      /** **/
+    }
+  }
+
+  // Expand Icon for items with submenus
+  ul.level_1 {
+    li.submenu {
+      > .toggle-submenu {
+        vertical-align: middle;
+        margin-right: 10px;
+        width: 30px;
+        text-align: center;
+        position: absolute;
+        top: 0;
+        cursor: pointer;
+        border:0;
+        background: 0;
+      }
+
+      > .toggle-submenu:before {
+        content: "\002B"; /** plus sign **/
+      }
+
+      > .toggle-submenu:hover:before {
+        /** **/
+      }
+
+      &.expanded {
+        > .toggle-submenu {
+          /** **/
+        }
+
+        > .toggle-submenu:before {
+          content: "\2212"; /** minus sign **/
+        }
+      }
+    }
+  }
+
+  // Level 1
+  ul.level_1 {
+    > li {
+      padding: 0;
+      line-height: 40px;
+
+      > .toggle-submenu {
+        right: 0;
+      }
+
+      > a, strong {
+        padding-left: $level-1-offset;
+      }
+
+      strong.active {
+        /** **/
+      }
+    }
+  }
+
+  // Level 2
+  ul.level_2 {
+    > li {
+      padding: 0;
+      line-height: 34px;
+
+      > .toggle-submenu {
+        right: 0;
+      }
+
+      > a, strong {
+        padding-left: $level-2-offset;
+      }
+
+      strong.active {
+        /** **/
+      }
+    }
+  }
+
+  // Level 3
+  ul.level_3 {
+    > li {
+      padding: 0;
+      line-height: 30px;
+
+      > .toggle-submenu {
+        right: 0;
+      }
+
+      > a, strong {
+        padding-left: $level-3-offset;
+      }
+
+      strong.active {
+        /** **/
+      }
+    }
+  }
+
+  // Level 4
+  ul.level_4 {
+    > li {
+      padding: 0;
+      line-height: 28px;
+
+      > .toggle-submenu {
+        right: 0;
+      }
+
+      > a, strong {
+        padding-left: $level-4-offset;
+      }
+
+      strong.active {
+        /** **/
+      }
+    }
+  }
+
+  // Show active submenus
+  ul.level_1 li.trail > ul {
+    display: block;
+  }
+}
