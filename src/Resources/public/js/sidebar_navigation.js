@@ -16,7 +16,7 @@ jQuery(document).ready(function () {
     jQuery('.sidebar-navigation li.submenu:not(.trail)')
     .attr('aria-expanded', 'false');
 
-    jQuery('.sidebar-navigation li.submenu.trail, .sidebar-navigation li.active')
+    jQuery('.sidebar-navigation li.submenu.trail, .sidebar-navigation li.submenu.active')
     .addClass('expanded')
     .attr('aria-expanded', 'true');
 
