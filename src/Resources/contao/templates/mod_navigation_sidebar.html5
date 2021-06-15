@@ -1,5 +1,5 @@
 <?php $GLOBALS['TL_HEAD'][] = \Contao\Template::generateStyleTag('bundles/markocupiccontaosidebarnavigation/css/sidebar_navigation.css'); ?>
-<?php $GLOBALS['TL_HEAD'][] = \Contao\Template::generateScriptTag('bundles/markocupiccontaosidebarnavigation/js/sidebar_navigation.js'); ?>
+<?php $GLOBALS['TL_HEAD'][] = \Contao\Template::generateScriptTag('bundles/markocupiccontaosidebarnavigation/js/sidebar_navigation.min.js'); ?>
 
 <!-- indexer::stop -->
 <nav class="<?= $this->class ?> sidebar-navigation block"<?= $this->cssID ?><?php if ($this->style): ?> style="<?= $this->style ?>"<?php endif; ?> itemscope itemtype="http://schema.org/SiteNavigationElement">
