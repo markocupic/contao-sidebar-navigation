@@ -4,7 +4,7 @@
 
 This module contains the template and the css/sass/js source for a multilevel drop down/slide down sidebar navigation.
 
-![sidebar navigation](https://github.com/markocupic/markocupic/blob/main/contao-sidebar-navigation/sidebar-navigation.webm)
+![sidebar navigation](https://github.com/markocupic/markocupic/blob/main/contao-sidebar-navigation/sidebar-navigation.gif)
 
 
 ## Usage
