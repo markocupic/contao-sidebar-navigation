@@ -21,14 +21,7 @@
     margin: 0;
     padding: 0;
 }
-.sidebar-navigation li {
-    display: block;
-    position: relative;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-}
-.sidebar-navigation .toggle-submenu {
+.sidebar-navigation ul li.submenu > .toggle-submenu {
     position: absolute;
     top: 0;
     right: 0;
@@ -40,65 +33,89 @@
     border: 0;
     background: 0;
 }
+.sidebar-navigation ul li.submenu > .toggle-submenu:before {
+    /** plus sign **/
+    content: "+";
+}
+.sidebar-navigation ul li.submenu.expanded > .toggle-submenu:before {
+    /** minus sign **/
+    content: "−";
+}
+.sidebar-navigation li {
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
 .sidebar-navigation ul.level_1 {
     display: block;
+    /** Hide submenus **/
 }
 .sidebar-navigation ul.level_1 ul {
     display: none;
 }
-.sidebar-navigation ul.level_1 li.submenu > .toggle-submenu:before {
-    content: "+";
-    /** plus sign **/
-}
-.sidebar-navigation ul.level_1 li.submenu > .toggle-submenu:hover:before {
-    /** **/
-}
-.sidebar-navigation ul.level_1 li.submenu.expanded > .toggle-submenu {
-    /** **/
-}
-.sidebar-navigation ul.level_1 li.submenu.expanded > .toggle-submenu:before {
-    content: "−";
-    /** minus sign **/
+.sidebar-navigation ul.level_1 li.trail > ul {
+    /** display active submenu items **/
+    display: block;
 }
 .sidebar-navigation ul.level_1 > li {
-    line-height: 40px;
+    line-height: 2.25rem;
+}
+.sidebar-navigation ul.level_1 > li > a, .sidebar-navigation ul.level_1 > li > strong {
+    font-size: 1.125rem;
+    padding-left: 2.5rem;
 }
 .sidebar-navigation ul.level_1 > li > .toggle-submenu {
-    right: 0;
-}
-.sidebar-navigation ul.level_1 > li > a, .sidebar-navigation ul.level_1 > li strong {
-    padding-left: 42px;
-}
-.sidebar-navigation ul.level_1 > li strong.active {
-    /** **/
+    font-size: 1.125rem;
 }
 .sidebar-navigation ul.level_2 > li {
-    line-height: 34px;
+    line-height: 2rem;
 }
-.sidebar-navigation ul.level_2 > li > a, .sidebar-navigation ul.level_2 > li strong {
-    padding-left: 50px;
+.sidebar-navigation ul.level_2 > li > a, .sidebar-navigation ul.level_2 > li > strong {
+    font-size: 1rem;
+    padding-left: 2.75rem;
 }
-.sidebar-navigation ul.level_2 > li strong.active {
-    /** **/
+.sidebar-navigation ul.level_2 > li > .toggle-submenu {
+    font-size: 1rem;
 }
 .sidebar-navigation ul.level_3 > li {
-    line-height: 30px;
+    line-height: 1.75rem;
 }
-.sidebar-navigation ul.level_3 > li > a, .sidebar-navigation ul.level_3 > li strong {
-    padding-left: 58px;
+.sidebar-navigation ul.level_3 > li > a, .sidebar-navigation ul.level_3 > li > strong {
+    font-size: 0.875rem;
+    padding-left: 3rem;
 }
-.sidebar-navigation ul.level_3 > li strong.active {
-    /** **/
+.sidebar-navigation ul.level_3 > li > .toggle-submenu {
+    font-size: 0.875rem;
 }
 .sidebar-navigation ul.level_4 > li {
-    line-height: 28px;
+    line-height: 1.5rem;
 }
-.sidebar-navigation ul.level_4 > li > a, .sidebar-navigation ul.level_4 > li strong {
-    padding-left: 66px;
+.sidebar-navigation ul.level_4 > li > a, .sidebar-navigation ul.level_4 > li > strong {
+    font-size: 0.75rem;
+    padding-left: 3.25rem;
 }
-.sidebar-navigation ul.level_4 > li strong.active {
-    /** **/
+.sidebar-navigation ul.level_4 > li > .toggle-submenu {
+    font-size: 0.75rem;
 }
-.sidebar-navigation ul.level_1 li.trail > ul {
-    display: block;
+.sidebar-navigation ul.level_5 > li {
+    line-height: 1.25rem;
+}
+.sidebar-navigation ul.level_5 > li > a, .sidebar-navigation ul.level_5 > li > strong {
+    font-size: 0.625rem;
+    padding-left: 3.5rem;
+}
+.sidebar-navigation ul.level_5 > li > .toggle-submenu {
+    font-size: 0.625rem;
+}
+.sidebar-navigation ul.level_6 > li {
+    line-height: 1rem;
+}
+.sidebar-navigation ul.level_6 > li > a, .sidebar-navigation ul.level_6 > li > strong {
+    font-size: 0.5rem;
+    padding-left: 3.75rem;
+}
+.sidebar-navigation ul.level_6 > li > .toggle-submenu {
+    font-size: 0.5rem;
 }
