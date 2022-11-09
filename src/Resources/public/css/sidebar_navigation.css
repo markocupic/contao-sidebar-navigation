@@ -21,6 +21,9 @@
     margin: 0;
     padding: 0;
 }
+.sidebar-navigation ul li.submenu {
+    position: relative;
+}
 .sidebar-navigation ul li.submenu > .toggle-submenu {
     position: absolute;
     top: 0;
@@ -31,7 +34,7 @@
     width: 30px;
     cursor: pointer;
     border: 0;
-    background: 0;
+    background: transparent;
 }
 .sidebar-navigation ul li.submenu > .toggle-submenu:before {
     /** plus sign **/
@@ -43,7 +46,6 @@
 }
 .sidebar-navigation li {
     display: block;
-    position: relative;
     margin: 0;
     padding: 0;
     overflow: hidden;

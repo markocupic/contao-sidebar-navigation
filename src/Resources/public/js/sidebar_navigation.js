@@ -10,7 +10,7 @@
 jQuery(document).ready(function () {
     // Insert dropdown toggle button
     jQuery('<button class="toggle-submenu" role="button"></button>')
-    .insertAfter(".sidebar-navigation li.submenu > a, .sidebar-navigation li.submenu > strong");
+    .insertBefore(".sidebar-navigation li.submenu > a, .sidebar-navigation li.submenu > strong");
 
     // Add aria-expanded attribute and expanded class
     jQuery('.sidebar-navigation li.submenu:not(.trail)')
