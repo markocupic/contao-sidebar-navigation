@@ -10,51 +10,55 @@
 jQuery(document).ready(function () {
     // Insert dropdown toggle button
     jQuery('<button class="toggle-submenu" role="button"></button>')
-    .insertBefore(".sidebar-navigation li.submenu > a, .sidebar-navigation li.submenu > strong");
+        .insertBefore(".sidebar-navigation li.submenu > a, .sidebar-navigation li.submenu > strong");
 
     // Add aria-expanded attribute and expanded class
     jQuery('.sidebar-navigation li.submenu:not(.trail)')
-    .attr('aria-expanded', 'false');
+        .attr('aria-expanded', 'false');
 
     jQuery('.sidebar-navigation li.submenu.trail, .sidebar-navigation li.submenu.active')
-    .addClass('expanded')
-    .attr('aria-expanded', 'true');
+        .addClass('expanded')
+        .attr('aria-expanded', 'true');
 
     // Handle click events on the dropdown toggle button
     setTimeout(function () {
-        jQuery('.sidebar-navigation .toggle-submenu').click(function (e) {
+        jQuery(
+            '.sidebar-navigation.mod_navigation .toggle-submenu, ' +
+            '.sidebar-navigation.mod_navigation li.submenu > a, ' +
+            '.sidebar-navigation.mod_navigation li.submenu > strong'
+        ).click(function (e) {
             e.preventDefault();
             e.stopPropagation();
 
             // Close menu
             jQuery(this).closest('li:not(.expanded)')
-            .find('li.expanded')
-            .removeClass('expanded')
-            .attr('aria-expanded', 'false')
-            .children('ul')
-            .slideUp();
-
-            // Close opened siblings
-            jQuery(this).closest('li')
-            .siblings('li.expanded')
-            .removeClass('expanded')
-            .attr('aria-expanded', 'false')
-            .children('ul')
-            .slideUp();
-
-            // Open/close item
-            if (jQuery(this).closest('li').hasClass('expanded')) {
-                jQuery(this).closest('li')
+                .find('li.expanded')
                 .removeClass('expanded')
                 .attr('aria-expanded', 'false')
                 .children('ul')
                 .slideUp();
+
+            // Close opened siblings
+            jQuery(this).closest('li')
+                .siblings('li.expanded')
+                .removeClass('expanded')
+                .attr('aria-expanded', 'false')
+                .children('ul')
+                .slideUp();
+
+            // Open/close item
+            if (jQuery(this).closest('li').hasClass('expanded')) {
+                jQuery(this).closest('li')
+                    .removeClass('expanded')
+                    .attr('aria-expanded', 'false')
+                    .children('ul')
+                    .slideUp();
             } else {
                 jQuery(this).closest('li')
-                .addClass('expanded')
-                .attr('aria-expanded', 'true')
-                .children('ul')
-                .slideDown();
+                    .addClass('expanded')
+                    .attr('aria-expanded', 'true')
+                    .children('ul')
+                    .slideDown();
             }
         });
     }, 20);

@@ -34,7 +34,7 @@ $color-hover: #ffffff;
       > .toggle-submenu {
         position: absolute;
         top: 0;
-        right: 0;
+        left: 150px;
         vertical-align: middle;
         text-align: center;
         margin-right: 10px;
@@ -46,13 +46,13 @@ $color-hover: #ffffff;
 
       > .toggle-submenu:before {
         /** plus sign **/
-        content: "\002B";
+        content: "+";
       }
 
       &.expanded {
         > .toggle-submenu:before {
           /** minus sign **/
-          content: "\2212";
+          content: "-";
         }
 
       }

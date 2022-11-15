@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /*
  * This file is part of Contao Sidebar Navigation.
  *
@@ -9,115 +8,117 @@
  * @link https://github.com/markocupic/contao-sidebar-navigatio
  */
 .sidebar-navigation {
-    padding: 0;
-    margin: 0;
-    text-align: left;
+  padding: 0;
+  margin: 0;
+  text-align: left;
 }
 .sidebar-navigation * {
-    text-decoration: none;
+  text-decoration: none;
 }
 .sidebar-navigation ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 .sidebar-navigation ul li.submenu {
-    position: relative;
+  position: relative;
 }
 .sidebar-navigation ul li.submenu > .toggle-submenu {
-    position: absolute;
-    top: 0;
-    right: 0;
-    vertical-align: middle;
-    text-align: center;
-    margin-right: 10px;
-    width: 30px;
-    cursor: pointer;
-    border: 0;
-    background: transparent;
+  position: absolute;
+  top: 0;
+  left: 150px;
+  vertical-align: middle;
+  text-align: center;
+  margin-right: 10px;
+  width: 30px;
+  cursor: pointer;
+  border: 0;
+  background: transparent;
 }
 .sidebar-navigation ul li.submenu > .toggle-submenu:before {
-    /** plus sign **/
-    content: "+";
+  /** plus sign **/
+  content: "+";
 }
 .sidebar-navigation ul li.submenu.expanded > .toggle-submenu:before {
-    /** minus sign **/
-    content: "−";
+  /** minus sign **/
+  content: "-";
 }
 .sidebar-navigation li {
-    display: block;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+  display: block;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 .sidebar-navigation ul.level_1 {
-    display: block;
-    /** Hide submenus **/
+  display: block;
+  /** Hide submenus **/
 }
 .sidebar-navigation ul.level_1 ul {
-    display: none;
+  display: none;
 }
 .sidebar-navigation ul.level_1 li.trail > ul {
-    /** display active submenu items **/
-    display: block;
+  /** display active submenu items **/
+  display: block;
 }
 .sidebar-navigation ul.level_1 > li {
-    line-height: 2.25rem;
+  line-height: 2.25rem;
 }
 .sidebar-navigation ul.level_1 > li > a, .sidebar-navigation ul.level_1 > li > strong {
-    font-size: 1.125rem;
-    padding-left: 2.5rem;
+  font-size: 1.125rem;
+  padding-left: 2.5rem;
 }
 .sidebar-navigation ul.level_1 > li > .toggle-submenu {
-    font-size: 1.125rem;
+  font-size: 1.125rem;
 }
 .sidebar-navigation ul.level_2 > li {
-    line-height: 2rem;
+  line-height: 2rem;
 }
 .sidebar-navigation ul.level_2 > li > a, .sidebar-navigation ul.level_2 > li > strong {
-    font-size: 1rem;
-    padding-left: 2.75rem;
+  font-size: 1rem;
+  padding-left: 2.75rem;
 }
 .sidebar-navigation ul.level_2 > li > .toggle-submenu {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 .sidebar-navigation ul.level_3 > li {
-    line-height: 1.75rem;
+  line-height: 1.75rem;
 }
 .sidebar-navigation ul.level_3 > li > a, .sidebar-navigation ul.level_3 > li > strong {
-    font-size: 0.875rem;
-    padding-left: 3rem;
+  font-size: 0.875rem;
+  padding-left: 3rem;
 }
 .sidebar-navigation ul.level_3 > li > .toggle-submenu {
-    font-size: 0.875rem;
+  font-size: 0.875rem;
 }
 .sidebar-navigation ul.level_4 > li {
-    line-height: 1.5rem;
+  line-height: 1.5rem;
 }
 .sidebar-navigation ul.level_4 > li > a, .sidebar-navigation ul.level_4 > li > strong {
-    font-size: 0.75rem;
-    padding-left: 3.25rem;
+  font-size: 0.75rem;
+  padding-left: 3.25rem;
 }
 .sidebar-navigation ul.level_4 > li > .toggle-submenu {
-    font-size: 0.75rem;
+  font-size: 0.75rem;
 }
 .sidebar-navigation ul.level_5 > li {
-    line-height: 1.25rem;
+  line-height: 1.25rem;
 }
 .sidebar-navigation ul.level_5 > li > a, .sidebar-navigation ul.level_5 > li > strong {
-    font-size: 0.625rem;
-    padding-left: 3.5rem;
+  font-size: 0.625rem;
+  padding-left: 3.5rem;
 }
 .sidebar-navigation ul.level_5 > li > .toggle-submenu {
-    font-size: 0.625rem;
+  font-size: 0.625rem;
 }
 .sidebar-navigation ul.level_6 > li {
-    line-height: 1rem;
+  line-height: 1rem;
 }
 .sidebar-navigation ul.level_6 > li > a, .sidebar-navigation ul.level_6 > li > strong {
-    font-size: 0.5rem;
-    padding-left: 3.75rem;
+  font-size: 0.5rem;
+  padding-left: 3.75rem;
 }
 .sidebar-navigation ul.level_6 > li > .toggle-submenu {
-    font-size: 0.5rem;
+  font-size: 0.5rem;
 }
+
+/*# sourceMappingURL=sidebar_navigation.css.map */
