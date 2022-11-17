@@ -6,7 +6,7 @@
         "sidebar",
         "navigation",
         "dropdown",
-        "slidedown",
+        "mobile",
         "jQuery"
     ],
     "type": "contao-bundle",
@@ -24,7 +24,8 @@
         "source": "https://github.com/markocupic/contao-sidebar-navigation"
     },
     "require": {
-        "contao/core-bundle": "^4.9"
+        "php": "^7.4 || ^8.0",
+        "contao/core-bundle": "^4.13 || 5.0"
     },
     "require-dev": {
         "contao/easy-coding-standard": "^5.0",
@@ -36,18 +37,16 @@
     "autoload": {
         "psr-4": {
             "Markocupic\\ContaoSidebarNavigation\\": "src/"
-        },
-        "classmap": [
-            "src/Resources/contao"
-        ],
-        "exclude-from-classmap": [
-            "src/Resources/contao/config",
-            "src/Resources/contao/dca",
-            "src/Resources/contao/languages",
-            "src/Resources/contao/templates"
-        ]
+        }
     },
     "extra": {
         "contao-manager-plugin": "Markocupic\\ContaoSidebarNavigation\\ContaoManager\\Plugin"
+    },
+    "config": {
+        "allow-plugins": {
+            "contao/manager-plugin": true,
+            "contao-components/installer": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     }
 }

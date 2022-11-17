@@ -10,6 +10,10 @@ This module contains the template and the css/sass/js source for a multilevel dr
 ## Usage
 Go to the Contao Backend. Activate jQuery in the layout settings. In the module settings then you can choose the **mod_navigation_sidebar.html5** template. 
 
+## Pages with subpages
+
+If you click on a page in the navigation that has subpages, you will not be linked to the corresponding page. Instead, the submenu opens with the corresponding subpages.
+
 ## Notice!
 This extension contains only a minimal style sheet.
 
