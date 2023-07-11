@@ -24,7 +24,7 @@
         "source": "https://github.com/markocupic/contao-sidebar-navigation"
     },
     "require": {
-        "php": "^7.4 || ^8.0",
+        "php": "^8.1",
         "contao/core-bundle": "^4.13 || ^5.0",
         "markocupic/contao-twig-assets": "^1.0"
     },
