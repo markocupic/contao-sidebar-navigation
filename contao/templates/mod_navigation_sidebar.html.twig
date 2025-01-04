@@ -1,6 +1,7 @@
 <script type="text/javascript" src="{{ asset('js/script.js', 'markocupic_contao_sidebar_navigation') }}"></script>
-
-{{ addCssResource({{ asset('css/style.css', 'markocupic_contao_sidebar_navigation') }}) }}
+{% add to head %}
+    <link rel="stylesheet" href="{{ asset('css/style.css', 'markocupic_contao_sidebar_navigation') }}">
+{% endadd %}
 
 <!-- indexer::stop -->
 {% set classes = ['sidebar-navigation' , 'block'] %}
@@ -29,6 +30,7 @@
                 if (ContaoSidebarNavigation) {
                     new ContaoSidebarNavigation({
                         'submenuContainer': '.submenu',
+                        'pageContainer': '.page-container', // non clickable links
                         'followSubmenuContainerLink': false,
                         'submenuTogglerHtml': '<button class="toggle-submenu" role="button"></button>',
                     });
