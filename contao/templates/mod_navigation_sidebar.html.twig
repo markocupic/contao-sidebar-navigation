@@ -1,35 +1,39 @@
-<script type="text/javascript" src="bundles/markocupiccontaosidebarnavigation/js/sidebar_navigation.min.js"></script>
+<script type="text/javascript" src="{{ asset('js/script.js', 'markocupic_contao_sidebar_navigation') }}"></script>
 
-{{ addCssResource('bundles/markocupiccontaosidebarnavigation/css/sidebar_navigation.css') }}
+{{ addCssResource({{ asset('css/style.css', 'markocupic_contao_sidebar_navigation') }}) }}
 
 <!-- indexer::stop -->
 {% set classes = ['sidebar-navigation' , 'block'] %}
 {% if class is defined and class is not empty %}
-	{% set classes = classes|merge(class|split(' ')) %}
+    {% set classes = classes|merge(class|split(' ')) %}
 {% endif %}
 {% set class = classes|join(' ') %}
 
 <nav class="{{ class }}" {{ cssID }}{% if style is defined and style is not empty %} style="{{ style }}"{% endif %}>
-	{% if headline is defined and headline is not empty %}
-		<{{ hl }}>{{ headline }}</{{ hl }}>
-	{% endif %}
-
-	<a href="{{ request }}#{{ skipId }}" class="invisible">{{ skipNavigation }}</a>
-	{{ items|raw }}
-	<a id="{{ skipId }}" class="invisible">&nbsp;</a>
-
+    {% if headline|default %}
+    <{{ hl }}>{{ headline }}</{{ hl }}>
+{% endif %}
+<a href="{{ request }}#{{ skipId }}" class="invisible">{{ skipNavigation }}</a>
+{{ items|raw }}
+<a id="{{ skipId }}" class="invisible">&nbsp;</a>
 </nav>
-
-<script>
-	window.addEventListener('DOMContentLoaded', (event) => {
-
-		if (ContaoSidebarNavigation) {
-			new ContaoSidebarNavigation({
-				'submenuContainer': '.submenu',
-				'followSubmenuContainerLink': false,
-				'submenuTogglerHtml': '<button class="toggle-submenu" role="button"></button>',
-			});
-		}
-	});
-</script>
 <!-- indexer::continue -->
+{% block nav_script %}
+    {% add "nav_script" to body %}
+        {% set script_attributes = attrs()
+            .setIfExists('nonce', csp_nonce('script-src'))
+            .mergeWith(script_attributes|default) %}
+        <script{{ script_attributes }}>
+            window.addEventListener('DOMContentLoaded', (event) => {
+
+                if (ContaoSidebarNavigation) {
+                    new ContaoSidebarNavigation({
+                        'submenuContainer': '.submenu',
+                        'followSubmenuContainerLink': false,
+                        'submenuTogglerHtml': '<button class="toggle-submenu" role="button"></button>',
+                    });
+                }
+            });
+        </script>
+    {% endadd %}
+{% endblock %}
