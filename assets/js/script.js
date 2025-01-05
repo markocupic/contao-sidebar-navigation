@@ -10,11 +10,12 @@
 
 class ContaoSidebarNavigation {
 
+
     opt = {
-        'submenuContainer': '.submenu',
-        'pageContainer': '.page-container',
-        'followPageContainerLink': false,
-        'submenuTogglerHtml': '<button class="toggle-submenu" role="button"></button>'
+        'submenuContainerClass': '.submenu',
+        'pageContainerClass': '.page-container', // Not-clickable links
+        'followPageContainerLinks': false, // Follow not-clickable links
+        'dropdownTogglerHtml': '<button class="toggle-submenu" role="button"></button>'
     }
 
     constructor(options) {
@@ -31,68 +32,98 @@ class ContaoSidebarNavigation {
     initialize() {
 
         // Insert dropdown toggle button
-        if (this.opt.submenuTogglerHtml) {
-            jQuery(this.opt.submenuTogglerHtml)
-                .insertBefore('.sidebar-navigation li' + this.opt.submenuContainer + ' > a, .sidebar-navigation li' + this.opt.submenuContainer + ' > strong');
+        if (this.opt.dropdownTogglerHtml) {
+            jQuery(this.opt.dropdownTogglerHtml)
+                .addClass('csn--dropdown-toggle')
+                .attr('role', 'button')
+                .insertBefore('.sidebar-navigation li' + this.opt.submenuContainerClass + ' > a, .sidebar-navigation li' + this.opt.submenuContainerClass + ' > strong')
+            ;
         }
 
         // Add aria-expanded attribute and expanded class
-        jQuery('.sidebar-navigation li' + this.opt.submenuContainer + ':not(.trail)')
-            .attr('aria-expanded', 'false');
+        jQuery(`.sidebar-navigation li${this.opt.submenuContainerClass}:not(.trail)`)
+            .removeClass('expanded')
+            .find('.csn--dropdown-toggle')
+            .attr('aria-expanded', 'false')
+        ;
 
-        jQuery('.sidebar-navigation li' + this.opt.submenuContainer + '.trail, .sidebar-navigation li' + this.opt.submenuContainer + '.active')
+        // Expand submenu if nav item has the "trail" or "active" class.
+        jQuery(`.sidebar-navigation li${this.opt.submenuContainerClass}.trail, .sidebar-navigation li${this.opt.submenuContainerClass}.active`)
             .addClass('expanded')
-            .attr('aria-expanded', 'true');
+            .find('.csn--dropdown-toggle')
+            .attr('aria-expanded', 'true')
+        ;
 
-        const toggler = [
-            '.sidebar-navigation.mod_navigation .toggle-submenu',
-        ];
+        let arrTogglers = ['.sidebar-navigation.mod_navigation .csn--dropdown-toggle'];
 
-        if (false === this.opt.followPageContainerLink) {
-            toggler.push('.sidebar-navigation.mod_navigation li' + this.opt.pageContainer + ' > a');
-            toggler.push('.sidebar-navigation.mod_navigation li' + this.opt.pageContainer + ' > strong');
+        if (false === this.opt.followPageContainerLinks) {
+            arrTogglers.push(`.sidebar-navigation.mod_navigation li${this.opt.pageContainerClass} > a`);
+            arrTogglers.push(`.sidebar-navigation.mod_navigation li${this.opt.pageContainerClass} > strong`);
+
+            const notClickableLinks = document.querySelectorAll(`.sidebar-navigation.mod_navigation li${this.opt.pageContainerClass} > a`);
+
+            for (const notClickableLink of notClickableLinks) {
+                // <a href="#" role="button">
+                notClickableLink.setAttribute('href', '#');
+                notClickableLink.setAttribute('role', 'button');
+                notClickableLink.setAttribute('focusable', 'true');
+            }
         }
 
         /**
          * Handle click events
          */
         setTimeout(() => {
-            jQuery(toggler.join(', ')).click((e) => {
-                const elClicked = e.target;
+            jQuery(arrTogglers.join(', ')).click((e) => {
+                const dropdownToggler = e.target;
                 e.preventDefault();
                 e.stopPropagation();
 
                 // Close menu
-                jQuery(elClicked).closest('li:not(.expanded)')
+                jQuery(dropdownToggler).closest('li:not(.expanded)')
                     .find('li.expanded')
                     .removeClass('expanded')
+                    .find('[aria-expanded]')
                     .attr('aria-expanded', 'false')
+                    .closest('li')
                     .children('ul')
-                    .slideUp();
+                    .slideUp()
+                ;
 
                 // Close opened siblings
-                jQuery(elClicked).closest('li')
+                jQuery(dropdownToggler).closest('li')
                     .siblings('li.expanded')
                     .removeClass('expanded')
+                    .find('[aria-expanded]')
                     .attr('aria-expanded', 'false')
+                    .closest('li')
                     .children('ul')
-                    .slideUp();
+                    .slideUp()
+                ;
 
-                // Open/close item
-                if (jQuery(elClicked).closest('li').hasClass('expanded')) {
-                    jQuery(elClicked).closest('li')
-                        .removeClass('expanded')
+                // Toggle dropdown
+                if (jQuery(dropdownToggler).closest('li').hasClass('expanded')) {
+                    // Close (slide down)
+                    jQuery(dropdownToggler).closest('li')
+                        .find('> .csn--dropdown-toggle')
                         .attr('aria-expanded', 'false')
+                        .closest('li')
+                        .removeClass('expanded')
                         .children('ul')
-                        .slideUp();
+                        .slideUp()
+                    ;
                 } else {
-                    jQuery(elClicked).closest('li')
-                        .addClass('expanded')
+                    // Open (slide up)
+                    jQuery(dropdownToggler).closest('li')
+                        .find('> .csn--dropdown-toggle')
                         .attr('aria-expanded', 'true')
+                        .closest('li')
+                        .addClass('expanded')
                         .children('ul')
-                        .slideDown();
+                        .slideDown()
+                    ;
                 }
             });
-        }, 50);
+        }, 100);
     }
 }

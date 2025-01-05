@@ -31,7 +31,7 @@ $color-hover: #ffffff;
     li.submenu {
       position: relative;
 
-      > .toggle-submenu {
+      > .csn--dropdown-toggle {
         position: absolute;
         top: 0;
         left: 150px;
@@ -44,19 +44,18 @@ $color-hover: #ffffff;
         background: transparent;
       }
 
-      > .toggle-submenu:before {
+      > .csn--dropdown-toggle:before {
         /** plus sign **/
         content: "+";
       }
 
       &.expanded {
-        > .toggle-submenu:before {
+        > .csn--dropdown-toggle:before {
           /** minus sign **/
           content: "-";
         }
 
       }
-
     }
   }
 
@@ -69,8 +68,8 @@ $color-hover: #ffffff;
     // background color on hover
     a:hover,
     strong:hover,
-    .toggle-submenu:hover ~ a,
-    .toggle-submenu:hover ~ strong {
+    .csn--dropdown-toggle:hover ~ a,
+    .csn--dropdown-toggle:hover ~ strong {
       //background-color: $background-hover;
       //color: $color-hover;
     }
@@ -87,7 +86,6 @@ $color-hover: #ffffff;
       /** display active submenu items **/
       display: block;
     }
-
   }
 
   @for $index from 1 through 6 {
@@ -101,13 +99,10 @@ $color-hover: #ffffff;
           padding-left: map-get($offsets, level_#{$index});
         }
 
-        > .toggle-submenu {
+        > .csn--dropdown-toggle {
           font-size: map-get($font-sizes, level_#{$index});
         }
-
       }
-
     }
-
   }
 }

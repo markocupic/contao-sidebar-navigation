@@ -29,10 +29,10 @@
 
                 if (ContaoSidebarNavigation) {
                     new ContaoSidebarNavigation({
-                        'submenuContainer': '.submenu',
-                        'pageContainer': '.page-container', // non clickable links
-                        'followSubmenuContainerLink': false,
-                        'submenuTogglerHtml': '<button class="toggle-submenu" role="button"></button>',
+                        'submenuContainerClass': '.submenu',
+                        'pageContainerClass': '.page-container', // Not-clickable links
+                        'followPageContainerLinks': false, // Follow not-clickable links
+                        'dropdownTogglerHtml': '<button class="toggle-submenu" role="button"></button>'
                     });
                 }
             });
