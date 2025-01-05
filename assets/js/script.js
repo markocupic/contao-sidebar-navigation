@@ -10,20 +10,21 @@
 
 class ContaoSidebarNavigation {
 
+    navEl = null;
 
     opt = {
-        'submenuContainerClass': '.submenu',
-        'pageContainerClass': '.page-container', // Not-clickable links
+        'submenuContainerClass': '.submenu', 'pageContainerClass': '.page-container', // Not-clickable links
         'followPageContainerLinks': false, // Follow not-clickable links
         'dropdownTogglerHtml': '<button class="toggle-submenu" role="button"></button>'
     }
 
-    constructor(options) {
+    constructor(navEl, options) {
+
+        this.navEl = navEl;
 
         // Override defaults
         this.opt = {
-            ...this.opt,
-            ...options
+            ...this.opt, ...options
         };
 
         this.initialize();
@@ -31,36 +32,49 @@ class ContaoSidebarNavigation {
 
     initialize() {
 
-        // Insert dropdown toggle button
-        if (this.opt.dropdownTogglerHtml) {
-            jQuery(this.opt.dropdownTogglerHtml)
-                .addClass('csn--dropdown-toggle')
-                .attr('role', 'button')
-                .insertBefore('.sidebar-navigation li' + this.opt.submenuContainerClass + ' > a, .sidebar-navigation li' + this.opt.submenuContainerClass + ' > strong')
-            ;
-        }
+        // Inject the html markup for the dropdown toggle button to each nav item that contains child menus.
+        (() => {
+            if (this.opt.dropdownTogglerHtml) {
+                let links = this.navEl.querySelectorAll(`li${this.opt.submenuContainerClass} > a, li${this.opt.submenuContainerClass} > strong`);
 
-        // Add aria-expanded attribute and expanded class
-        jQuery(`.sidebar-navigation li${this.opt.submenuContainerClass}:not(.trail)`)
-            .removeClass('expanded')
-            .find('.csn--dropdown-toggle')
-            .attr('aria-expanded', 'false')
-        ;
+                for (const link of links) {
+                    const toggler = document.createRange().createContextualFragment(this.opt.dropdownTogglerHtml).firstElementChild;
+                    toggler.classList.add('csn--dropdown-toggle');
+                    toggler.setAttribute('role', 'button');
+                    link.insertAdjacentElement('beforebegin', toggler);
+                }
+            }
+        })();
 
-        // Expand submenu if nav item has the "trail" or "active" class.
-        jQuery(`.sidebar-navigation li${this.opt.submenuContainerClass}.trail, .sidebar-navigation li${this.opt.submenuContainerClass}.active`)
-            .addClass('expanded')
-            .find('.csn--dropdown-toggle')
-            .attr('aria-expanded', 'true')
-        ;
+        // Add the "aria-expanded" attribute and the css class "expanded" to the open list item.
+        (() => {
+            let listItems = this.navEl.querySelectorAll(`li${this.opt.submenuContainerClass}:not(.trail)`);
 
-        let arrTogglers = ['.sidebar-navigation.mod_navigation .csn--dropdown-toggle'];
+            for (const listItem of listItems) {
+                listItem.classList.remove('expanded');
+                listItem.querySelector('.csn--dropdown-toggle')?.setAttribute('aria-expanded', 'false');
+            }
+        })();
+
+        // Expand child menu if nav item has the css class "trail" or "active".
+        (() => {
+            const listItems = this.navEl.querySelectorAll(`li${this.opt.submenuContainerClass}.trail, li${this.opt.submenuContainerClass}.active`);
+            for (const listItem of listItems) {
+                listItem.classList.add('expanded');
+                const togglers = listItem.querySelectorAll('.csn--dropdown-toggle');
+                for (const toggler of togglers) {
+                    toggler.setAttribute('aria-expanded', 'true');
+                }
+            }
+        })();
+
+        let arrTogglers = ['.csn--dropdown-toggle'];
 
         if (false === this.opt.followPageContainerLinks) {
-            arrTogglers.push(`.sidebar-navigation.mod_navigation li${this.opt.pageContainerClass} > a`);
-            arrTogglers.push(`.sidebar-navigation.mod_navigation li${this.opt.pageContainerClass} > strong`);
+            arrTogglers.push(`li${this.opt.pageContainerClass} > a`);
+            arrTogglers.push(`li${this.opt.pageContainerClass} > strong`);
 
-            const notClickableLinks = document.querySelectorAll(`.sidebar-navigation.mod_navigation li${this.opt.pageContainerClass} > a`);
+            const notClickableLinks = this.navEl.querySelectorAll(`li${this.opt.pageContainerClass} > a`);
 
             for (const notClickableLink of notClickableLinks) {
                 // <a href="#" role="button">
@@ -74,56 +88,103 @@ class ContaoSidebarNavigation {
          * Handle click events
          */
         setTimeout(() => {
-            jQuery(arrTogglers.join(', ')).click((e) => {
-                const dropdownToggler = e.target;
-                e.preventDefault();
-                e.stopPropagation();
+            const togglers = this.navEl.querySelectorAll(arrTogglers.join(', '));
 
-                // Close menu
-                jQuery(dropdownToggler).closest('li:not(.expanded)')
-                    .find('li.expanded')
-                    .removeClass('expanded')
-                    .find('[aria-expanded]')
-                    .attr('aria-expanded', 'false')
-                    .closest('li')
-                    .children('ul')
-                    .slideUp()
-                ;
+            for (const toggler of togglers) {
+                toggler.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
 
-                // Close opened siblings
-                jQuery(dropdownToggler).closest('li')
-                    .siblings('li.expanded')
-                    .removeClass('expanded')
-                    .find('[aria-expanded]')
-                    .attr('aria-expanded', 'false')
-                    .closest('li')
-                    .children('ul')
-                    .slideUp()
-                ;
+                    const dropdownToggler = e.target;
 
-                // Toggle dropdown
-                if (jQuery(dropdownToggler).closest('li').hasClass('expanded')) {
-                    // Close (slide down)
-                    jQuery(dropdownToggler).closest('li')
-                        .find('> .csn--dropdown-toggle')
-                        .attr('aria-expanded', 'false')
-                        .closest('li')
-                        .removeClass('expanded')
-                        .children('ul')
-                        .slideUp()
-                    ;
-                } else {
-                    // Open (slide up)
-                    jQuery(dropdownToggler).closest('li')
-                        .find('> .csn--dropdown-toggle')
-                        .attr('aria-expanded', 'true')
-                        .closest('li')
-                        .addClass('expanded')
-                        .children('ul')
-                        .slideDown()
-                    ;
-                }
-            });
+                    // Close menu
+                    (() => {
+                        const listItem = dropdownToggler.closest('li:not(.expanded)');
+                        if (listItem) {
+                            const childListItems = listItem.querySelectorAll('li.expanded');
+
+                            for (const childListItem of childListItems) {
+                                childListItem.classList.remove('expanded');
+                                const childLists = childListItem.querySelectorAll('ul');
+                                for (const childList of childLists) {
+                                    this.slideUp(childList);
+                                }
+                            }
+
+                            const childTogglers = listItem.querySelectorAll('[aria-expanded]');
+
+                            for (const childToggler of childTogglers) {
+                                childToggler.setAttribute('aria-expanded', 'false');
+                            }
+                        }
+                    })();
+
+                    // Close opened siblings
+                    (() => {
+                        const listItems = this.getSiblings(dropdownToggler.closest('li'));
+                        for (const listItem of listItems) {
+                            listItem.classList.remove('expanded');
+                            const togglers = listItem.querySelectorAll('[aria-expanded]');
+
+                            for (const toggler of togglers) {
+                                toggler.setAttribute('aria-expanded', 'false');
+                            }
+
+                            const lists = listItem.querySelectorAll('ul');
+
+                            for (const list of lists) {
+                                this.slideUp(list);
+                            }
+                        }
+                    })();
+
+                    // Toggle dropdown
+                    (() => {
+                        const listItem = dropdownToggler.closest('li');
+                        if (listItem.classList.contains('expanded')) {
+                            // Close (slide up)
+                            const togglers = listItem.querySelectorAll(':scope > .csn--dropdown-toggle');
+
+                            for (const toggler of togglers) {
+                                toggler.setAttribute('aria-expanded', 'false');
+                            }
+
+                            listItem.classList.remove('expanded');
+                            const lists = listItem.querySelectorAll(':scope > ul');
+
+                            for (const list of lists) {
+                                this.slideUp(list);
+                            }
+                        } else {
+                            // Open (slide down)
+                            const togglers = listItem.querySelectorAll(':scope > .csn--dropdown-toggle');
+
+                            for (const toggler of togglers) {
+                                toggler.setAttribute('aria-expanded', 'true');
+                            }
+
+                            listItem.classList.add('expanded');
+                            const lists = listItem.querySelectorAll(':scope > ul');
+
+                            for (const list of lists) {
+                                this.slideDown(list);
+                            }
+                        }
+                    })();
+                });
+            }
         }, 100);
+    }
+
+    getSiblings(el) {
+        return Array.from(el.parentNode.children).filter(child => child !== el);
+    }
+
+    slideUp(el) {
+        jQuery(el).slideUp();
+    }
+
+    slideDown(el) {
+        jQuery(el).slideDown();
     }
 }

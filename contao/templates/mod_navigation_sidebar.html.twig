@@ -20,22 +20,22 @@
 </nav>
 <!-- indexer::continue -->
 {% block nav_script %}
-    {% add "nav_script" to body %}
-        {% set script_attributes = attrs()
-            .setIfExists('nonce', csp_nonce('script-src'))
-            .mergeWith(script_attributes|default) %}
-        <script{{ script_attributes }}>
-            window.addEventListener('DOMContentLoaded', (event) => {
+    {% set script_attributes = attrs()
+        .setIfExists('nonce', csp_nonce('script-src'))
+        .mergeWith(script_attributes|default) %}
+    <script{{ script_attributes }}>
+        const currentScript = document.currentScript;
 
-                if (ContaoSidebarNavigation) {
-                    new ContaoSidebarNavigation({
-                        'submenuContainerClass': '.submenu',
-                        'pageContainerClass': '.page-container', // Not-clickable links
-                        'followPageContainerLinks': false, // Follow not-clickable links
-                        'dropdownTogglerHtml': '<button class="toggle-submenu" role="button"></button>'
-                    });
-                }
-            });
-        </script>
-    {% endadd %}
+        window.addEventListener('DOMContentLoaded', (event) => {
+            if (ContaoSidebarNavigation) {
+                const nav = currentScript.parentElement.querySelector(':scope > nav');
+                new ContaoSidebarNavigation(nav, {
+                    'submenuContainerClass': '.submenu',
+                    'pageContainerClass': '.page-container', // Not-clickable links
+                    'followPageContainerLinks': false, // Follow not-clickable links
+                    'dropdownTogglerHtml': '<button class="toggle-submenu" role="button"></button>'
+                });
+            }
+        });
+    </script>
 {% endblock %}
