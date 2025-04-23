@@ -8,7 +8,7 @@ This module contains the template and the css/sass/js source for a multilevel dr
 
 
 ## Usage
-Go to the Contao Backend. Activate jQuery in the layout settings. In the module settings then you can choose the **mod_navigation_sidebar.html5** template. 
+Go to the Contao Backend and select the **mod_navigation_sidebar.html5** template. 
 
 ## Pages with subpages
 
