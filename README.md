@@ -2,7 +2,7 @@
 
 # Contao Sidebar Navigation
 
-This module contains the template and the css/sass/js source for a multilevel drop-down/slide-down sidebar navigation.
+This module contains the template and the css/sass/js source for a multilevel drop-down/slide-down sidebar navigation. No jQuery required!
 
 ![sidebar navigation](https://github.com/markocupic/markocupic/blob/main/contao-sidebar-navigation/contao-sidebar-navigation.gif)
 

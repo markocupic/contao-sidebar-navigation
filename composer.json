@@ -7,7 +7,7 @@
         "navigation",
         "dropdown",
         "mobile",
-        "jQuery"
+        "vanilla"
     ],
     "type": "contao-bundle",
     "license": "GPL-3.0-or-later",

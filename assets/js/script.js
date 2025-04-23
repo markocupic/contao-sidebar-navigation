@@ -59,6 +59,7 @@ class ContaoSidebarNavigation {
         // Expand child menu if nav item has the css class "trail" or "active".
         (() => {
             const listItems = this.navEl.querySelectorAll(`li${this.opt.submenuContainerClass}.trail, li${this.opt.submenuContainerClass}.active`);
+
             for (const listItem of listItems) {
                 listItem.classList.add('expanded');
                 const togglers = listItem.querySelectorAll('.csn--dropdown-toggle');
@@ -122,6 +123,7 @@ class ContaoSidebarNavigation {
                     // Close opened siblings
                     (() => {
                         const listItems = this.getSiblings(dropdownToggler.closest('li'));
+
                         for (const listItem of listItems) {
                             listItem.classList.remove('expanded');
                             const togglers = listItem.querySelectorAll('[aria-expanded]');
@@ -141,6 +143,7 @@ class ContaoSidebarNavigation {
                     // Toggle dropdown
                     (() => {
                         const listItem = dropdownToggler.closest('li');
+
                         if (listItem.classList.contains('expanded')) {
                             // Close (slide up)
                             const togglers = listItem.querySelectorAll(':scope > .csn--dropdown-toggle');
@@ -181,10 +184,50 @@ class ContaoSidebarNavigation {
     }
 
     slideUp(el) {
-        jQuery(el).slideUp();
+        el.style.transition = 'height 0.4s, padding 0.4s, margin 0.4s';
+        el.style.overflow = 'hidden';
+        el.style.height = el.offsetHeight + 'px';
+        el.offsetHeight; // Trigger reflow to ensure the height transition works
+        el.style.height = '0';
+        el.style.paddingTop = '0';
+        el.style.paddingBottom = '0';
+        el.style.marginTop = '0';
+        el.style.marginBottom = '0';
+
+        // Remove element from flow after animation
+        setTimeout(() => {
+            el.style.display = 'none';
+        }, 400); // Match the transition duration
     }
 
     slideDown(el) {
-        jQuery(el).slideDown();
+        el.style.removeProperty('display');
+        let display = window.getComputedStyle(el).display;
+        if (display === 'none') display = 'block';
+        el.style.display = display;
+
+        const height = el.scrollHeight; // Retrieve the full height of the element
+
+        el.style.height = '0'; // Set initial height for the animation
+        el.style.overflow = 'hidden';
+        el.style.transition = 'height 0.4s ease-out, padding 0.4s ease-out, margin 0.4s ease-out';
+        el.offsetHeight; // Trigger reflow to start the transition
+        el.style.height = height + 'px'; // Animate to full height
+        el.style.paddingTop = '';
+        el.style.paddingBottom = '';
+        el.style.marginTop = '';
+        el.style.marginBottom = '';
+
+        // Clean up styles after animation finishes
+        el.addEventListener('transitionend', function removeInlineStyles() {
+            el.style.removeProperty('height');
+            el.style.removeProperty('overflow');
+            el.style.removeProperty('transition');
+            el.style.removeProperty('padding-top');
+            el.style.removeProperty('padding-bottom');
+            el.style.removeProperty('margin-top');
+            el.style.removeProperty('margin-bottom');
+            el.removeEventListener('transitionend', removeInlineStyles); // Remove event listener
+        });
     }
 }
