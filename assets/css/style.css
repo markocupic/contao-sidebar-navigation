@@ -1,12 +1,4 @@
-/*
- * This file is part of Contao Sidebar Navigation.
- *
- * (c) Marko Cupic <m.cupic@gmx.ch>
- * @license GPL-3.0-or-later
- * For the full copyright and license information,
- * please view the LICENSE file that was distributed with this source code.
- * @link https://github.com/markocupic/contao-sidebar-navigation
- */
+/* * This file is part of Contao Sidebar Navigation. * * (c) Marko Cupic <m.cupic@gmx.ch> * @license GPL-3.0-or-later * For the full copyright and license information, * please view the LICENSE file that was distributed with this source code. * @link https://github.com/markocupic/contao-sidebar-navigation */
 .sidebar-navigation {
   padding: 0;
   margin: 0;
@@ -23,7 +15,7 @@
 .sidebar-navigation ul li.submenu {
   position: relative;
 }
-.sidebar-navigation ul li.submenu > .toggle-submenu {
+.sidebar-navigation ul li.submenu > .csn--dropdown-toggle {
   position: absolute;
   top: 0;
   left: 150px;
@@ -35,12 +27,14 @@
   border: 0;
   background: transparent;
 }
-.sidebar-navigation ul li.submenu > .toggle-submenu:before {
+.sidebar-navigation ul li.submenu > .csn--dropdown-toggle:before {
   /** plus sign **/
   content: "+";
 }
-.sidebar-navigation ul li.submenu.expanded > .toggle-submenu:before {
+.sidebar-navigation ul li.submenu.expanded {
   /** minus sign **/
+}
+.sidebar-navigation ul li.submenu.expanded > .csn--dropdown-toggle:before {
   content: "-";
 }
 .sidebar-navigation li {
@@ -67,7 +61,7 @@
   font-size: 1.125rem;
   padding-left: 2.5rem;
 }
-.sidebar-navigation ul.level_1 > li > .toggle-submenu {
+.sidebar-navigation ul.level_1 > li > .csn--dropdown-toggle {
   font-size: 1.125rem;
 }
 .sidebar-navigation ul.level_2 > li {
@@ -77,7 +71,7 @@
   font-size: 1rem;
   padding-left: 2.75rem;
 }
-.sidebar-navigation ul.level_2 > li > .toggle-submenu {
+.sidebar-navigation ul.level_2 > li > .csn--dropdown-toggle {
   font-size: 1rem;
 }
 .sidebar-navigation ul.level_3 > li {
@@ -87,7 +81,7 @@
   font-size: 0.875rem;
   padding-left: 3rem;
 }
-.sidebar-navigation ul.level_3 > li > .toggle-submenu {
+.sidebar-navigation ul.level_3 > li > .csn--dropdown-toggle {
   font-size: 0.875rem;
 }
 .sidebar-navigation ul.level_4 > li {
@@ -97,7 +91,7 @@
   font-size: 0.75rem;
   padding-left: 3.25rem;
 }
-.sidebar-navigation ul.level_4 > li > .toggle-submenu {
+.sidebar-navigation ul.level_4 > li > .csn--dropdown-toggle {
   font-size: 0.75rem;
 }
 .sidebar-navigation ul.level_5 > li {
@@ -107,7 +101,7 @@
   font-size: 0.625rem;
   padding-left: 3.5rem;
 }
-.sidebar-navigation ul.level_5 > li > .toggle-submenu {
+.sidebar-navigation ul.level_5 > li > .csn--dropdown-toggle {
   font-size: 0.625rem;
 }
 .sidebar-navigation ul.level_6 > li {
@@ -117,8 +111,7 @@
   font-size: 0.5rem;
   padding-left: 3.75rem;
 }
-.sidebar-navigation ul.level_6 > li > .toggle-submenu {
+.sidebar-navigation ul.level_6 > li > .csn--dropdown-toggle {
   font-size: 0.5rem;
 }
-
-/*# sourceMappingURL=sidebar_navigation.css.map */
+ 
