@@ -15,7 +15,8 @@ class ContaoSidebarNavigation {
     opt = {
         'submenuContainerClass': '.submenu', 'pageContainerClass': '.page-container', // Not-clickable links
         'followPageContainerLinks': false, // Follow not-clickable links
-        'dropdownTogglerHtml': '<button class="toggle-submenu" role="button"></button>'
+        'dropdownTogglerHtml': '<button class="toggle-submenu" role="button"></button>',
+        'dropdownTogglerPosition': 'before', // after or before
     }
 
     constructor(navEl, options) {
@@ -41,7 +42,11 @@ class ContaoSidebarNavigation {
                     const toggler = document.createRange().createContextualFragment(this.opt.dropdownTogglerHtml).firstElementChild;
                     toggler.classList.add('csn--dropdown-toggle');
                     toggler.setAttribute('role', 'button');
-                    link.insertAdjacentElement('beforebegin', toggler);
+                    if (this.opt.dropdownTogglerPosition === 'before') {
+                        link.insertAdjacentElement('beforebegin', toggler);
+                    } else {
+                        link.insertAdjacentElement('afterend', toggler);
+                    }
                 }
             }
         })();
