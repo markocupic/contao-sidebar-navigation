@@ -10,7 +10,7 @@
 {% endif %}
 {% set class = classes|join(' ') %}
 
-<nav class="{{ class }}" {{ cssID }}{% if style is defined and style is not empty %} style="{{ style }}"{% endif %}>
+<nav class="{{ class }}" {{ cssID|raw }}{% if style is defined and style is not empty %} style="{{ style }}"{% endif %}>
     {% if headline|default %}
     <{{ hl }}>{{ headline }}</{{ hl }}>
 {% endif %}
@@ -33,8 +33,8 @@
                     'submenuContainerClass': '.submenu',
                     'pageContainerClass': '.page-container', // Not-clickable links
                     'followPageContainerLinks': false, // Follow not-clickable links
-                    'dropdownTogglerHtml': '<button class="toggle-submenu" role="button"></button>'
-                    'dropdownTogglerPosition': 'before' // 'before' or 'after'
+                    'dropdownTogglerHtml': '<button class="toggle-submenu" role="button"></button>',
+                    'dropdownTogglerPosition': 'before', // 'before' or 'after'
                 });
             }
         });
