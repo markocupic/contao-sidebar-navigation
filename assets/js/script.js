@@ -90,6 +90,12 @@ class ContaoSidebarNavigation {
             }
         }
 
+        document.dispatchEvent(new CustomEvent('csn:initialized', {
+            detail: {
+                nav_element: this.navEl,
+            }
+        }));
+
         /**
          * Handle click events
          */
