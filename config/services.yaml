@@ -6,4 +6,7 @@ services:
 
     Markocupic\ContaoSidebarNavigation\:
         resource: ../src/
-        exclude: ../src/{DependencyInjection,Model}
+        exclude:
+            - ../src/ContaoManager
+            - ../src/DependencyInjection
+            - ../src/MarkocupicContaoSidebarNavigation.php

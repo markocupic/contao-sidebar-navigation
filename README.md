@@ -7,8 +7,15 @@ This module contains the template and the css/sass/js source for a multilevel dr
 ![sidebar navigation](https://github.com/markocupic/markocupic/blob/main/contao-sidebar-navigation/contao-sidebar-navigation.gif)
 
 
+## Requirements
+
+- PHP 8.1 or higher (Contao 6 requires a more recent PHP version)
+- Contao 5.3 or Contao 6
+
+Contao 4.13 is no longer supported. Please use version 2.x of this extension for Contao 4.13.
+
 ## Usage
-Go to the Contao Backend and select the **mod_navigation_sidebar.html5** template. 
+Create a navigation module in the Contao backend and select the **mod_navigation_sidebar** template.
 
 ## Pages with subpages
 
