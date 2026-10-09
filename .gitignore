@@ -8,7 +8,9 @@
 /tools/*/vendor
 /composer.lock
 /.php-cs-fixer.cache
-/tools/phpunit/.phpunit.result.cache
+/vendor/
+/.phpunit.result.cache
+/.phpunit.cache/
 
 # Webpack
 /node_modules/

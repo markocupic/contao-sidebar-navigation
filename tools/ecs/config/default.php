@@ -12,7 +12,7 @@ use Symplify\EasyCodingStandard\ValueObject\Option;
 return ECSConfig::configure()
     ->withSets([SetList::CONTAO])
     ->withPaths([
-        __DIR__ . '/../../src',
+        __DIR__ . '/../../../src',
     ])
     ->withSkip([
         MethodChainingIndentationFixer::class => [
@@ -22,7 +22,7 @@ return ECSConfig::configure()
             //'core-bundle/tests/Session/Attribute/ArrayAttributeBagTest.php',
             //'*/Foo/Bar.php',
         ],
-        __DIR__ . '/../../src/Foo2/Bar2.php',
+        __DIR__ . '/../../../src/Foo2/Bar2.php',
     ])
     ->withRootFiles()
     ->withParallel()
